@@ -1,5 +1,12 @@
 # PSR-6 Cache Health Checker
 
+[![Latest Version](https://img.shields.io/github/tag/oat-sa/lib-health-check-cache.svg?style=flat&label=release)](https://github.com/oat-sa/lib-health-check-cache/tags)
+[![License GPL2](http://img.shields.io/badge/licence-GPL%202.0-blue.svg)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![Build Status](https://travis-ci.org/oat-sa/lib-health-check-cache.svg?branch=master)](https://travis-ci.org/oat-sa/lib-health-check-cache)
+[![Coverage Status](https://coveralls.io/repos/github/oat-sa/lib-health-check-cache/badge.svg?branch=master)](https://coveralls.io/github/oat-sa/lib-health-check-cache?branch=master)
+[![Packagist Downloads](http://img.shields.io/packagist/dt/oat-sa/lib-health-check-cache.svg)](https://packagist.org/packages/oat-sa/lib-health-check-cache)
+
+
 > [PSR-6](https://www.php-fig.org/psr/psr-6/) cache health checker for the [Health checks PHP library](https://github.com/oat-sa/lib-health-check)
 
 ## Table of contents
