@@ -107,7 +107,7 @@ final class CacheCheckerTest extends TestCase
 
         self::assertTrue($result->isSuccess());
         self::assertEquals(
-            sprintf('Success on writing, reading and deleting cache item "%s"', self::CUSTOM_KEY),
+            sprintf('Success on writing, reading and deleting cache item %s', self::CUSTOM_KEY),
             $result->getMessage()
         );
     }
@@ -157,7 +157,7 @@ final class CacheCheckerTest extends TestCase
         $result = $this->subject->check();
 
         self::assertFalse($result->isSuccess());
-        self::assertEquals(sprintf('Persisting item "%s" failed', self::CUSTOM_KEY), $result->getMessage());
+        self::assertEquals(sprintf('Writing item %s failed', self::CUSTOM_KEY), $result->getMessage());
     }
 
     public function testForFailedCheckerResultWhenItemHitMissed(): void
@@ -188,7 +188,7 @@ final class CacheCheckerTest extends TestCase
         $result = $this->subject->check();
 
         self::assertFalse($result->isSuccess());
-        self::assertEquals(sprintf('Missed hit on item "%s"', self::CUSTOM_KEY), $result->getMessage());
+        self::assertEquals(sprintf('Missed hit on item %s', self::CUSTOM_KEY), $result->getMessage());
     }
 
     public function testForFailedCheckerResultWhenRetrievedValueIsNotTheSame(): void
@@ -224,7 +224,7 @@ final class CacheCheckerTest extends TestCase
         $result = $this->subject->check();
 
         self::assertFalse($result->isSuccess());
-        self::assertEquals(sprintf('Mismatched value on item "%s"', self::CUSTOM_KEY), $result->getMessage());
+        self::assertEquals(sprintf('Mismatched value on item %s', self::CUSTOM_KEY), $result->getMessage());
     }
 
     public function testForFailedCheckerResultWhenRemovingItemFailed(): void
@@ -266,6 +266,6 @@ final class CacheCheckerTest extends TestCase
         $result = $this->subject->check();
 
         self::assertFalse($result->isSuccess());
-        self::assertEquals(sprintf('Removing item "%s" failed', self::CUSTOM_KEY), $result->getMessage());
+        self::assertEquals(sprintf('Removing item %s failed', self::CUSTOM_KEY), $result->getMessage());
     }
 }

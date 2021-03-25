@@ -22,13 +22,13 @@ declare(strict_types=1);
 
 namespace OAT\Library\HealthCheckCache\Tests\Unit;
 
-use OAT\Library\HealthCheckCache\RamseyCacheKeyGenerator;
+use OAT\Library\HealthCheckCache\UuidCacheKeyGenerator;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidFactory;
 use Ramsey\Uuid\UuidInterface;
 
-class RamseyCacheKeyGeneratorTest extends TestCase
+class UuidCacheKeyGeneratorTest extends TestCase
 {
     private const TEST_UUID = '16dfb592-dbc2-4727-9fff-34db268fdddd';
 
@@ -40,9 +40,9 @@ class RamseyCacheKeyGeneratorTest extends TestCase
     {
         $this->prepareTestUuidFactory();
 
-        $generator = new RamseyCacheKeyGenerator();
+        $generator = new UuidCacheKeyGenerator();
 
-        self::assertSame(sprintf('oat-health-check-%s', self::TEST_UUID), $generator->generate());
+        self::assertSame(sprintf('health-check-%s', self::TEST_UUID), $generator->generate());
     }
 
     /**
@@ -53,14 +53,15 @@ class RamseyCacheKeyGeneratorTest extends TestCase
     {
         $this->prepareTestUuidFactory();
 
-        $generator = new RamseyCacheKeyGenerator('custom-prefix');
+        $generator = new UuidCacheKeyGenerator('custom-prefix');
 
         self::assertSame(sprintf('custom-prefix-%s', self::TEST_UUID), $generator->generate());
     }
 
     private function prepareTestUuidFactory(): void
     {
-        $factory = new class() extends UuidFactory {
+        $factory = new class() extends UuidFactory
+        {
             public $uuid;
 
             public function uuid4(): UuidInterface

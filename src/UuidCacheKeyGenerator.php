@@ -24,9 +24,9 @@ namespace OAT\Library\HealthCheckCache;
 
 use Ramsey\Uuid\Uuid;
 
-final class RamseyCacheKeyGenerator implements CacheKeyGeneratorInterface
+final class UuidCacheKeyGenerator implements CacheKeyGeneratorInterface
 {
-    private const DEFAULT_PREFIX = 'oat-health-check';
+    private const DEFAULT_PREFIX = 'health-check';
 
     /** @var string */
     private $prefix;

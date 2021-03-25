@@ -1,5 +1,7 @@
 # PSR-6 Cache Health Checker
 
+> [PSR-6](https://www.php-fig.org/psr/psr-6/) cache health checker for the [Health checks PHP library](https://github.com/oat-sa/lib-health-check)
+
 ## Table of contents
 - [Installation](#installation)
 - [Usage](#usage)
@@ -22,14 +24,13 @@ declare(strict_types=1);
 
 use OAT\Library\HealthCheck\HealthChecker;
 use OAT\Library\HealthCheckCache\CacheChecker;
-use OAT\Library\HealthCheckCache\RamseyCacheKeyGenerator;
+use OAT\Library\HealthCheckCache\UuidCacheKeyGenerator;
+use Psr\Cache\CacheItemPoolInterface;
 
 $healthChecker = new HealthChecker();
 
-// your cache pool instance that implements the PSR-6 CacheItemPoolInterface
-$psr6CachePool = ...
-
-$cacheChecker = new CacheChecker($psr6CachePool, new RamseyCacheKeyGenerator());
+/** @var CacheItemPoolInterface $cache */
+$cacheChecker = new CacheChecker($cache, new UuidCacheKeyGenerator());
 
 $results = $healthChecker
     ->registerChecker($cacheChecker)

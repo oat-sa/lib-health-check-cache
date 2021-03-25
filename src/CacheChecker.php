@@ -26,9 +26,8 @@ use OAT\Library\HealthCheck\Checker\CheckerInterface;
 use OAT\Library\HealthCheck\Result\CheckerResult;
 use Psr\Cache\CacheException;
 use Psr\Cache\CacheItemPoolInterface;
-use Throwable;
 
-final class CacheChecker implements CheckerInterface
+class CacheChecker implements CheckerInterface
 {
     private const IDENTIFIER = 'cache';
 
@@ -38,11 +37,10 @@ final class CacheChecker implements CheckerInterface
     /** @var CacheKeyGeneratorInterface */
     private $cacheKeyGenerator;
 
-
-    public function __construct(CacheItemPoolInterface $cacheItemPool, CacheKeyGeneratorInterface $cacheKeyGenerator)
+    public function __construct(CacheItemPoolInterface $cacheItemPool, CacheKeyGeneratorInterface $cacheKeyGenerator = null)
     {
         $this->cacheItemPool = $cacheItemPool;
-        $this->cacheKeyGenerator = $cacheKeyGenerator;
+        $this->cacheKeyGenerator = $cacheKeyGenerator ?? new UuidCacheKeyGenerator();
     }
 
     public function getIdentifier(): string
@@ -60,27 +58,27 @@ final class CacheChecker implements CheckerInterface
             $item->expiresAfter(30);
 
             if (!$this->cacheItemPool->save($item)) {
-                return new CheckerResult(false, sprintf('Persisting item "%s" failed', $keyAndValue));
+                return new CheckerResult(false, sprintf('Writing item %s failed', $keyAndValue));
             }
 
             $item = $this->cacheItemPool->getItem($keyAndValue);
             if (!$item->isHit()) {
-                return new CheckerResult(false, sprintf('Missed hit on item "%s"', $keyAndValue));
+                return new CheckerResult(false, sprintf('Missed hit on item %s', $keyAndValue));
             }
 
             if ($item->get() !== $keyAndValue) {
-                return new CheckerResult(false, sprintf('Mismatched value on item "%s"', $keyAndValue));
+                return new CheckerResult(false, sprintf('Mismatched value on item %s', $keyAndValue));
             }
 
             if (!$this->cacheItemPool->deleteItem($keyAndValue)) {
-                return new CheckerResult(false, sprintf('Removing item "%s" failed', $keyAndValue));
+                return new CheckerResult(false, sprintf('Removing item %s failed', $keyAndValue));
             }
 
             return new CheckerResult(
                 true,
-                sprintf('Success on writing, reading and deleting cache item "%s"', $keyAndValue)
+                sprintf('Success on writing, reading and deleting cache item %s', $keyAndValue)
             );
-        } catch (CacheException|Throwable $exception) {
+        } catch (CacheException $exception) {
             return new CheckerResult(false, $exception->getMessage());
         }
     }
