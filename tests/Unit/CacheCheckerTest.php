@@ -31,7 +31,7 @@ use Psr\Cache\CacheException;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
-final class CacheCheckerTest extends TestCase
+class CacheCheckerTest extends TestCase
 {
     private const CUSTOM_KEY = 'test-key';
 
