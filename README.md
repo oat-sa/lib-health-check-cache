@@ -37,14 +37,14 @@ use Psr\Cache\CacheItemPoolInterface;
 $healthChecker = new HealthChecker();
 
 /** @var CacheItemPoolInterface $cache */
-$cacheChecker = new CacheChecker($cache, new UuidCacheKeyGenerator());
+$cacheChecker = new CacheChecker($cache);
 
 $results = $healthChecker
     ->registerChecker($cacheChecker)
     ->performChecks();
 ```
 
-> **_Note_**: The built-in [RamseyCacheKeyGenerator](src/RamseyCacheKeyGenerator.php) can accept a custom prefix. If not provided, a default prefix will be used.
+> **_Note_**: The built-in [UuidCacheKeyGenerator](src/UuidCacheKeyGenerator.php) can accept a custom prefix. If not provided, a default prefix will be used.
 
 > **_Note_**: If you need a custom logic to generate the cache key, create your own key generator by implementing [CacheKeyGeneratorInterface](src/CacheKeyGeneratorInterface.php)
 > Make sure your generated key is unique enough.

@@ -24,16 +24,16 @@ namespace OAT\Library\HealthCheckCache;
 
 use Ramsey\Uuid\Uuid;
 
-final class UuidCacheKeyGenerator implements CacheKeyGeneratorInterface
+class UuidCacheKeyGenerator implements CacheKeyGeneratorInterface
 {
     private const DEFAULT_PREFIX = 'health-check';
 
     /** @var string */
     private $prefix;
 
-    public function __construct(string $prefix = null)
+    public function __construct(string $prefix = self::DEFAULT_PREFIX)
     {
-        $this->prefix = $prefix ?? self::DEFAULT_PREFIX;
+        $this->prefix = $prefix;
     }
 
     public function generate(): string
