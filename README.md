@@ -31,7 +31,6 @@ declare(strict_types=1);
 
 use OAT\Library\HealthCheck\HealthChecker;
 use OAT\Library\HealthCheckCache\CacheChecker;
-use OAT\Library\HealthCheckCache\UuidCacheKeyGenerator;
 use Psr\Cache\CacheItemPoolInterface;
 
 $healthChecker = new HealthChecker();
