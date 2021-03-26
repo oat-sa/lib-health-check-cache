@@ -4,4 +4,4 @@
 
 ### Added
 - `CacheChecker` class
-- `RamseyCacheKeyGenerator` class
+- `UuidCacheKeyGenerator` class

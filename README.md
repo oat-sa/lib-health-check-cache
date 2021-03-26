@@ -48,6 +48,8 @@ $results = $healthChecker
 
 > **_Note_**: If you need a custom logic to generate the cache key, create your own key generator by implementing [CacheKeyGeneratorInterface](src/CacheKeyGeneratorInterface.php)
 > Make sure your generated key is unique enough.
+
+
 ## Tests
 
 To run tests:
